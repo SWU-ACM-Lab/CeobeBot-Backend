@@ -9,13 +9,20 @@
 ```text
 .
 ├── api
-├── bin
 ├── controller
 ├── module
-└── util
+└── middleware
 ```
 
 + api是封装Http(s)Api的目录，其中v1提供简易版HttpApi服务，v2提供RESTful风格API服务。
++ controller是封装服务的目录，CURD操作都在此处。
++ module是封装数据对象的目录，配置文件、数据库对象、请求/响应对象都在此处。
++ middleware是封装各种工具包的目录，redis、database等各种基础包都在此处。
+
+CeobeBot-Backend使用了以下框架：
+
++ API服务: [gin-gonic/gin](https://github.com/gin-gonic/gin)
++ ORM框架: [go-xorm/xorm](https://gitea.com/xorm/xorm)
 
 # 2. 文档
 
@@ -36,6 +43,10 @@
 您需要将上述信息发送至[support@mail.swu-acm.cn](mailto:support@mail.swu-acm.cn)，同时您需要确保您使用我们后端服务时不触犯中华人民共和国法律，同时不侵犯他人的权益，并承担您行为所带来的可能的后果。
 
 ## 3.2 部署
+
+0. 前置准备
+
+您需要安装`Redis`与`Mysql/MariaDB`，并记录他们的相关信息以在配置时使用。
 
 1. 克隆本项目到本地
 
@@ -85,9 +96,11 @@ go run main.go
 
 感谢下列人员/组织以及他们为本项目做出的贡献。
 
-| NickName | Contribution |
-| :==: | :==: |
-| [SunistC](https://github.com/sunist-c) | 后端构建者 |
-| [Jecosine](https://github.com/Jecosine) | 前端构建者与数据库支持 |
-| [pianfanshaan](https://github.com/pianfanshaan) | 项目测试与数据库支持 |
-| [西南大学ACM实验室](https://github.com/SWU-ACM-Lab) | 托管服务器支持 |
+|                           NickName                           |     Contributions      |
+| :----------------------------------------------------------: | :--------------------: |
+|            [SunistC](https://github.com/sunist-c)            |       后端构建者       |
+|           [Jecosine](https://github.com/Jecosine)            | 前端构建者与数据库支持 |
+|       [pianfanshaan](https://github.com/pianfanshaan)        |  项目测试与数据库支持  |
+|     [西南大学ACM实验室](https://github.com/SWU-ACM-Lab)      |     托管服务器支持     |
+| [Arondight/Adachi-Bot](https://github.com/Arondight/Adachi-BOT) |     基础机器人框架     |
+
