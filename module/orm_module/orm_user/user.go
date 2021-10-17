@@ -9,5 +9,4 @@ type Users struct {
 	Token       string    `xorm:"char(64)"`             // 用户Token
 	UpdateTime  time.Time `xorm:"notnull"`              // 用户更新时间
 	Scope       uint      `xorm:"notnull default(111)"` // 用户权限
-	ClientId    uint64    `xorm:"notnull"`              // 客户端ID -> Clients: Id
 }
