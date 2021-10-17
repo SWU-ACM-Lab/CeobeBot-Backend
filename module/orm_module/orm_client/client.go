@@ -13,4 +13,5 @@ type Clients struct {
 	Scope        uint      `xorm:"notnull default(111)"` // 客户端权限
 	CallBalance  uint      `xorm:"notnull default(100)"` // 客户端调用余额
 	UpdateTime   time.Time `xorm:"notnull"`              // 客户端更新时间
+	CreateTime   time.Time `xorm:"notnull"`              // 客户端创建时间
 }
