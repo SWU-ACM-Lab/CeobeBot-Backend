@@ -88,6 +88,7 @@ func (c WordInterface) getWord(route *gin.RouterGroup, db database.MysqlConnecti
 					Pos:        word.Pos,
 					WordForm:   word.WordForms,
 					Paraphrase: word.Paraphrase,
+					AudioSources: word.AudioSources,
 				})
 				return
 			}
