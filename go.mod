@@ -3,10 +3,10 @@ module CeobeBot-Backend
 go 1.16
 
 require (
-	github.com/gin-gonic/gin v1.7.4 // indirect
+	github.com/gin-gonic/gin v1.7.4
 	github.com/go-playground/validator/v10 v10.9.0 // indirect
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
-	github.com/go-xorm/xorm v0.7.9 // indirect
+	github.com/go-sql-driver/mysql v1.6.0
+	github.com/go-xorm/xorm v0.7.9
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
@@ -18,5 +18,5 @@ require (
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	xorm.io/builder v0.3.9 // indirect
-	xorm.io/core v0.7.3 // indirect
+	xorm.io/core v0.7.3
 )
