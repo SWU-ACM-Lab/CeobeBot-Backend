@@ -13,7 +13,7 @@ type MysqlConnection struct {
 	isConnected bool
 }
 
-func (c* MysqlConnection) Connect (config application_module.DatabaseConfig) error {
+func (c *MysqlConnection) Connect(config application_module.DatabaseConfig) error {
 	if c.isConnected {
 		if err := c.Close(); err != nil {
 			return err
@@ -44,7 +44,7 @@ func (c MysqlConnection) Ping() error {
 	}
 }
 
-func (c* MysqlConnection) Close() error {
+func (c *MysqlConnection) Close() error {
 	if c.isConnected {
 		return c.Connection.Close()
 	} else {

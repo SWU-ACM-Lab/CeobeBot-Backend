@@ -11,7 +11,6 @@ import (
 )
 
 type ClientInterface struct {
-
 }
 
 func (c ClientInterface) BindApi(engine *gin.Engine, db database.MysqlConnection) error {

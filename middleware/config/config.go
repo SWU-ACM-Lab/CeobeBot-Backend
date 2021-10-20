@@ -10,7 +10,7 @@ import (
 )
 
 // Config 配置文件
-type Config struct{
+type Config struct {
 	conf map[string]url.Values
 }
 
@@ -31,7 +31,7 @@ func (c *Config) Int(tag string) (int, error) {
 }
 
 // Int64 返回一个int64配置值
-func(c *Config) Int64(tag string) (int64, error) {
+func (c *Config) Int64(tag string) (int64, error) {
 	return strconv.ParseInt(c.String(tag), 10, 64)
 }
 
@@ -73,10 +73,10 @@ func NewFileConf(filePath string) (*Config, error) {
 		}
 
 		if idx := strings.Index(lstr, "["); idx != -1 {
-			if lstr[len(lstr) - 1:] != "]" {
+			if lstr[len(lstr)-1:] != "]" {
 				return nil, errors.New("Error:field to parse this symbol style:\"" + lstr + "\"")
 			}
-			tag = lstr[1:len(lstr) - 1]
+			tag = lstr[1 : len(lstr)-1]
 			cf.conf[tag] = url.Values{}
 		} else {
 			lstr = replacer.Replace(lstr)
