@@ -16,6 +16,7 @@ func (c WordInterface) BindApi(engine *gin.Engine, db database.MysqlConnection) 
 	route := engine.Group("/v1/words")
 
 	c.getWord(route, db)
+	c.getWordProblem(route, db)
 	//c.addClient(route, db)
 
 	return nil
@@ -44,7 +45,7 @@ func (c WordInterface) getWord(route *gin.RouterGroup, db database.MysqlConnecti
 					return
 				} else {
 					// 返回Client
-					context.JSON(200, words.GetClientResponse{
+					context.JSON(200, words.GetWordResponse{
 						BaseResponse: response_module.BaseResponse{
 							Message: "Success",
 							Time:    time.Now().String(),
@@ -77,20 +78,49 @@ func (c WordInterface) getWord(route *gin.RouterGroup, db database.MysqlConnecti
 				return
 			} else {
 				// 返回Client
-				context.JSON(200, words.GetClientResponse{
+				context.JSON(200, words.GetWordResponse{
 					BaseResponse: response_module.BaseResponse{
 						Message: "Success",
 						Time:    time.Now().String(),
 					},
-					Id:         word.Id,
-					Spell:      word.Spell,
-					Phonetic:   word.Phonetic,
-					Pos:        word.Pos,
-					WordForm:   word.WordForms,
-					Paraphrase: word.Paraphrase,
+					Id:           word.Id,
+					Spell:        word.Spell,
+					Phonetic:     word.Phonetic,
+					Pos:          word.Pos,
+					WordForm:     word.WordForms,
+					Paraphrase:   word.Paraphrase,
 					AudioSources: word.AudioSources,
 				})
 				return
+			}
+		}
+	})
+}
+
+func (c WordInterface) getWordProblem(route *gin.RouterGroup, db database.MysqlConnection) {
+	route.GET("/get-problem", func(context *gin.Context) {
+		controller := word_controller.WordController{}
+		if controller.Init(db) != nil {
+			context.JSON(500, nil)
+			return
+		} else {
+			result, problem, err := controller.CreateWordProblem()
+			if result != true || err != nil {
+				context.JSON(500, nil)
+				return
+			} else {
+				context.JSON(200, words.GetWordProblemResponse{
+					BaseResponse: response_module.BaseResponse{
+						Message: "Success",
+						Time:    time.Now().String(),
+					},
+					Spell:        problem.Spell,
+					OptionsA:     problem.OptionsA,
+					OptionsB:     problem.OptionsB,
+					OptionsC:     problem.OptionsC,
+					OptionsD:     problem.OptionsD,
+					Answer:       problem.Answer,
+				})
 			}
 		}
 	})

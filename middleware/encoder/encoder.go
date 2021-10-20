@@ -6,7 +6,7 @@ import (
 	"io"
 )
 
-func EncodeHash (str string) (string, error) {
+func EncodeHash(str string) (string, error) {
 	h := md5.New()
 	if _, err := io.WriteString(h, str); err != nil {
 		return "", err

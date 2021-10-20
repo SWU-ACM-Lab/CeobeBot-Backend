@@ -12,13 +12,17 @@ import (
 	"CeobeBot-Backend/module/orm_module/orm_quote"
 	"CeobeBot-Backend/module/orm_module/orm_user"
 	"github.com/gin-gonic/gin"
+	"math/rand"
 	"os"
 	"os/exec"
 	"path/filepath"
+	"time"
 	"xorm.io/core"
 )
 
 func Init() error {
+	rand.Seed(time.Now().Unix())
+
 	// 获取基础路径
 	if path, err := exec.LookPath(os.Args[0]); err != nil {
 		return err
@@ -93,7 +97,6 @@ func BindApiEngine() error {
 			return err
 		}
 	}
-
 
 	return nil
 }

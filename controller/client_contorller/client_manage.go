@@ -21,12 +21,12 @@ func (c ClientController) AddClient(name, email string, scope uint, admin uint64
 		} else {
 			// 生成Client信息
 			client := orm_client.Clients{
-				Name:         name,
-				AdminEmail:   email,
-				Status:       uint(ClientStatus(normal)),
-				Scope:        scope,
-				CallBalance:  10000,
-				UpdateTime:   time.Now(),
+				Name:        name,
+				AdminEmail:  email,
+				Status:      uint(ClientStatus(normal)),
+				Scope:       scope,
+				CallBalance: 10000,
+				UpdateTime:  time.Now(),
 			}
 			client.Secret, _ = encoder.EncodeHash(client.AdminEmail + time.Now().String())
 			client.Token, _ = encoder.EncodeHash(client.Name + time.Now().String())

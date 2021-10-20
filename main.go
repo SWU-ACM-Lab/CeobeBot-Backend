@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+
 	fmt.Println(initializer.Init())
 	fmt.Println(initializer.SyncDatabase())
 	fmt.Println(initializer.BindApiEngine())
