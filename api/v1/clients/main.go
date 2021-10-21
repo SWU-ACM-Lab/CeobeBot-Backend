@@ -72,6 +72,7 @@ func (c ClientInterface) getClient(route *gin.RouterGroup, db database.MysqlConn
 
 func (c ClientInterface) addClient(route *gin.RouterGroup, db database.MysqlConnection) {
 	route.POST("", func(context *gin.Context) {
-
+		client := client_contorller.ClientController{}
+		client.Init(db)
 	})
 }

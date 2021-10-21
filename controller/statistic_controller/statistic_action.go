@@ -81,7 +81,8 @@ func (c StatisticController) SolveWordProblem(cid uint64, token string, uid uint
 	} else {
 		data.TodayEnglishWord += 1
 		data.TotalEnglishWord += 1
-		data.Intimacy += uint(module.RobotConfig.RememberWordIntimacy)
+		data.Intimacy += 1
+		//data.Intimacy += uint(module.RobotConfig.RememberWordIntimacy)  // todo: FIX ini loader
 		c.db.Connection.ID(data.Id).Update(data)
 	}
 }

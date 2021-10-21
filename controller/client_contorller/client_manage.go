@@ -27,6 +27,7 @@ func (c ClientController) AddClient(name, email string, scope uint, admin uint64
 				Scope:       scope,
 				CallBalance: 10000,
 				UpdateTime:  time.Now(),
+				CreateTime:  time.Now(),
 			}
 			client.Secret, _ = encoder.EncodeHash(client.AdminEmail + time.Now().String())
 			client.Token, _ = encoder.EncodeHash(client.Name + time.Now().String())

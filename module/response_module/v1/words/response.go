@@ -22,3 +22,10 @@ type GetWordProblemResponse struct {
 	OptionsD string `json:"options_d"` // 选项D
 	Answer   int    `json:"answer"`    // 正确答案
 }
+
+type JudgeWordProblemResponse struct {
+	response_module.BaseResponse
+	Correct bool `json:"correct"`
+	Success bool `json:"success"`
+	Answer  int  `json:"answer"`
+}

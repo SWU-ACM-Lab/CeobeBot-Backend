@@ -63,8 +63,6 @@ func (c WordController) CreateWordProblem() (result bool, problem runtime_word.W
 		}
 	}
 
-	fmt.Println(options)
-
 	sort.Ints(options)
 
 	problems := make([]orm_word.Words, 4)
@@ -73,7 +71,6 @@ func (c WordController) CreateWordProblem() (result bool, problem runtime_word.W
 		if problemResult != true || problemError != nil {
 			return false, runtime_word.WordProblem{}, problemError
 		}
-		fmt.Println(problems[i].Pos)
 	}
 
 	var problemPos []string
@@ -90,8 +87,6 @@ func (c WordController) CreateWordProblem() (result bool, problem runtime_word.W
 
 		problemPos = append(problemPos, temp)
 	}
-
-	fmt.Println(problemPos)
 
 	// 确定正确单词并组装
 	index := rand.Intn(4)
@@ -160,35 +155,35 @@ func (c WordController) CreateWordProblemWithAuth(cid uint64, token string, uid 
 	}
 }
 
-func (c WordController) JudgeWordProblemWithAuth(cid uint64, token string, uid uint64, uType uint, answer int) (result, success bool, err error) {
+func (c WordController) JudgeWordProblemWithAuth(cid uint64, token string, uid uint64, uType uint, answer int) (result, success bool, correct int, err error) {
 	// 获取cid对应的Client
 	client := orm_client.Clients{}
 	queryResult, queryError := c.db.Connection.ID(cid).Get(&client)
 
 	if queryResult != true || queryError != nil {
-		return false, false, queryError
+		return false, false, -1, queryError
 	} else if client.Token != token {
-		return false, false, nil
+		return false, false, -1, nil
 	} else {
 		// 获取uid, uType对应的题目
 		record := orm_word.WordProblemRecord{}
 		recordResult, recordError := c.db.Connection.Table(orm_word.WordProblemRecord{}).Where("UserId = ?", uid).Where("UserType = ?", uType).Get(&record)
 		if recordResult != true || recordError != nil {
-			return false, false, recordError
+			return false, false, -1, recordError
 		} else {
 			// 判题
 			if record.Status == 2 {
-				return record.Answer == answer, false, nil
+				return record.Answer == answer, false, record.Answer, nil
 			} else {
 				if record.Answer == answer {
 					record.Status = 2
 					if _, updateError := c.db.Connection.ID(record.Id).Update(record); updateError != nil {
-						return false, false, updateError
+						return false, false, -1, updateError
 					} else {
-						return true, true, nil
+						return true, true, record.Answer, nil
 					}
 				} else {
-					return false, false, nil
+					return false, false, record.Answer, nil
 				}
 			}
 		}
