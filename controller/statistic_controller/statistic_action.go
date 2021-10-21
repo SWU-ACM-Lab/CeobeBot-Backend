@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func (c StatisticController) updateStatistic(cid uint64, token string, uid uint64, uname string) (result bool, data orm_user.UserStatisticData, err error){
+func (c StatisticController) updateStatistic(cid uint64, token string, uid uint64, uname string) (result bool, data orm_user.UserStatisticData, err error) {
 	clientController := client_contorller.ClientController{}
 	userController := user_controller.UserController{}
 	userController.Init(c.db)

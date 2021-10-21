@@ -9,6 +9,7 @@ type RobotConfig struct {
 	ActiveIntimacy              int // 连续登录亲密度加成
 	AddProblemIntimacy          int // 上传题目亲密度加成
 	AddDialogIntimacy           int // 上传对话亲密度加成
+	CompleteDailyTaskIntimacy   int // 完成每日任务亲密度加成
 }
 
 func (c *RobotConfig) Init(config config.Config) error {
@@ -29,6 +30,9 @@ func (c *RobotConfig) Init(config config.Config) error {
 		return err
 	}
 	if c.AddDialogIntimacy, err = config.Int("robot.add_dialog_intimacy"); err != nil {
+		return err
+	}
+	if c.CompleteDailyTaskIntimacy, err = config.Int("robot.complete_daily_task"); err != nil {
 		return err
 	}
 
