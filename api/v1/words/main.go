@@ -114,12 +114,12 @@ func (c WordInterface) getWordProblem(route *gin.RouterGroup, db database.MysqlC
 						Message: "Success",
 						Time:    time.Now().String(),
 					},
-					Spell:        problem.Spell,
-					OptionsA:     problem.OptionsA,
-					OptionsB:     problem.OptionsB,
-					OptionsC:     problem.OptionsC,
-					OptionsD:     problem.OptionsD,
-					Answer:       problem.Answer,
+					Spell:    problem.Spell,
+					OptionsA: problem.OptionsA,
+					OptionsB: problem.OptionsB,
+					OptionsC: problem.OptionsC,
+					OptionsD: problem.OptionsD,
+					Answer:   problem.Answer,
 				})
 			}
 		}
