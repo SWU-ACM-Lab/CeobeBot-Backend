@@ -10,7 +10,9 @@ import (
 	"CeobeBot-Backend/module/orm_module/orm_fortune"
 	"CeobeBot-Backend/module/orm_module/orm_problem"
 	"CeobeBot-Backend/module/orm_module/orm_quote"
+	"CeobeBot-Backend/module/orm_module/orm_task"
 	"CeobeBot-Backend/module/orm_module/orm_user"
+	"CeobeBot-Backend/module/orm_module/orm_word"
 	"github.com/gin-gonic/gin"
 	"math/rand"
 	"os"
@@ -75,6 +77,9 @@ func SyncDatabase() error {
 			new(orm_quote.Quotes),
 			new(orm_user.Users),
 			new(orm_user.UserStatisticData),
+			new(orm_user.UserTaskList),
+			new(orm_word.WordProblemRecord),
+			new(orm_task.Tasks),
 		); err != nil {
 			return err
 		}
