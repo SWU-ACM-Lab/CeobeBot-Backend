@@ -139,7 +139,7 @@ func (c WordController) CreateWordProblemWithAuth(cid uint64, token string, uid 
 					} else {
 						return true, problems, nil
 					}
-				// 否则则创建
+					// 否则则创建
 				} else {
 					record = orm_word.WordProblemRecord{
 						UserId:     uid,
