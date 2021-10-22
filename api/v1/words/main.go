@@ -221,7 +221,7 @@ func (c WordInterface) judgeWordProblemWithAuth(route *gin.RouterGroup, db datab
 							},
 							Correct: result,
 							Success: success,
-							Answer: correct,
+							Answer:  correct,
 						})
 						return
 					}

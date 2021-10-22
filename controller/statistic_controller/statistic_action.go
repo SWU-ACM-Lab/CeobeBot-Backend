@@ -1,7 +1,7 @@
 package statistic_controller
 
 import (
-	"CeobeBot-Backend/controller/client_contorller"
+	"CeobeBot-Backend/controller/client_controller"
 	"CeobeBot-Backend/controller/user_controller"
 	"CeobeBot-Backend/module"
 	"CeobeBot-Backend/module/orm_module/orm_user"
@@ -9,7 +9,7 @@ import (
 )
 
 func (c StatisticController) updateStatistic(cid uint64, token string, uid uint64, uname string) (result bool, data orm_user.UserStatisticData, err error) {
-	clientController := client_contorller.ClientController{}
+	clientController := client_controller.ClientController{}
 	userController := user_controller.UserController{}
 	userController.Init(c.db)
 	clientController.Init(c.db)
