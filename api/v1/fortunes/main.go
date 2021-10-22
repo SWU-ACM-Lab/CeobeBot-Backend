@@ -20,6 +20,7 @@ func (c FortuneInterface) BindApi(engine *gin.Engine, db database.MysqlConnectio
 	route := engine.Group("/v1/fortunes")
 
 	c.addFortune(route, db)
+	c.getFortune(route, db)
 	return nil
 }
 
@@ -67,5 +68,47 @@ func (c FortuneInterface) addFortune(route *gin.RouterGroup, db database.MysqlCo
 			})
 		}
 
+	})
+}
+
+func (c FortuneInterface) getFortune(route *gin.RouterGroup, db database.MysqlConnection) {
+	route.GET("", func(context *gin.Context) {
+		// 查询上下文
+		cid := context.Query("cid")
+		token := context.Query("token")
+		theme := context.Query("theme")
+		uid := context.Query("uid")
+		if cid == "" || token == "" || theme == "" || uid == "" {
+			context.JSON(400, nil)
+			return
+		}
+		intCid, err0 := strconv.ParseUint(cid, 10, 64)
+		intTheme, err1 := strconv.ParseUint(theme, 10, 64)
+		intUid, err2 := strconv.ParseUint(uid, 10, 64)
+		if err0 != nil || err1 != nil || err2 != nil {
+			context.JSON(400, nil)
+			return
+		}
+
+		// 生成签文
+		fortunes := fortune_controller.FortuneController{}
+		fortunes.Init(db)
+		result, fortune, err := fortunes.GetFortunesWithAuth(intCid, token, intUid, intTheme)
+		if result != true || err != nil {
+			context.JSON(500, nil)
+			return
+		} else {
+			context.JSON(200, fortunes2.FortuneResponse{
+				BaseResponse: response_module.BaseResponse{
+					Message: "Success",
+					Time:    time.Now().String(),
+				},
+				Theme:        fortune.Theme,
+				FortuneLevel: fortune.LevelToString(),
+				Report:       fortune.Report,
+				Description:  fortune.Description,
+			})
+			return
+		}
 	})
 }
