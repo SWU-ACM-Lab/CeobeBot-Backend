@@ -3,6 +3,8 @@ package initializer
 import (
 	"CeobeBot-Backend/api"
 	"CeobeBot-Backend/api/v1/clients"
+	"CeobeBot-Backend/api/v1/fortunes"
+	"CeobeBot-Backend/api/v1/users"
 	"CeobeBot-Backend/api/v1/words"
 	utils "CeobeBot-Backend/middleware/config"
 	"CeobeBot-Backend/module"
@@ -91,11 +93,16 @@ func BindApiEngine() error {
 	// 声明API接口
 	var ClientApi api.ServiceInterface = clients.ClientInterface{}
 	var WordApi api.ServiceInterface = words.WordInterface{}
+	var UserApi api.ServiceInterface = users.UserInterface{}
+	var FortuneApi api.ServiceInterface = fortunes.FortuneInterface{}
 
 	ApiGroup := [...]api.ServiceInterface{
 		ClientApi,
 		WordApi,
+		UserApi,
+		FortuneApi,
 	}
+
 	// 绑定API路由
 	for _, entityApi := range ApiGroup {
 		if err := entityApi.BindApi(module.ApiEngine, module.DatabaseService); err != nil {

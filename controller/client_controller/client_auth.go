@@ -1,4 +1,4 @@
-package client_contorller
+package client_controller
 
 import (
 	"CeobeBot-Backend/module"

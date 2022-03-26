@@ -1,7 +1,7 @@
 package clients
 
 import (
-	"CeobeBot-Backend/controller/client_contorller"
+	"CeobeBot-Backend/controller/client_controller"
 	"CeobeBot-Backend/middleware/database"
 	"CeobeBot-Backend/module/response_module"
 	"CeobeBot-Backend/module/response_module/v1/clients"
@@ -33,7 +33,7 @@ func (c ClientInterface) getClient(route *gin.RouterGroup, db database.MysqlConn
 			context.JSON(400, nil)
 			return
 		} else {
-			controller := client_contorller.ClientController{}
+			controller := client_controller.ClientController{}
 			intCid, err1 := strconv.ParseUint(cid, 10, 64)
 			intUid, err2 := strconv.ParseUint(admin, 10, 64)
 			if controller.Init(db) != nil || err1 != nil || err2 != nil {
@@ -72,6 +72,7 @@ func (c ClientInterface) getClient(route *gin.RouterGroup, db database.MysqlConn
 
 func (c ClientInterface) addClient(route *gin.RouterGroup, db database.MysqlConnection) {
 	route.POST("", func(context *gin.Context) {
-
+		client := client_controller.ClientController{}
+		client.Init(db)
 	})
 }
